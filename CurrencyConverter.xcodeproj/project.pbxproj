@@ -15,6 +15,12 @@
 		D8737E04207D1E1C0010139C /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8737E03207D1E1C0010139C /* Currency.swift */; };
 		D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8737E06207D1F7F0010139C /* CurrencyConversionViewController.swift */; };
 		D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */; };
+		D8B27FC5207E0456000009F3 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FC4207E0456000009F3 /* APIRequest.swift */; };
+		D8B27FC8207E09AD000009F3 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FC7207E09AD000009F3 /* Serialization.swift */; };
+		D8B27FCC207E0C1D000009F3 /* ExchangeRateSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FCB207E0C1D000009F3 /* ExchangeRateSerializer.swift */; };
+		D8B27FCE207E0C71000009F3 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FCD207E0C71000009F3 /* ExchangeRate.swift */; };
+		D8B27FD1207E11DB000009F3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FD0207E11DB000009F3 /* APIClient.swift */; };
+		D8F2DC18207E1B770081FCCC /* ExchangeRateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +36,12 @@
 		D8737E03207D1E1C0010139C /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		D8737E06207D1F7F0010139C /* CurrencyConversionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionViewController.swift; sourceTree = "<group>"; };
 		D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerViewController.swift; sourceTree = "<group>"; };
+		D8B27FC4207E0456000009F3 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		D8B27FC7207E09AD000009F3 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
+		D8B27FCB207E0C1D000009F3 /* ExchangeRateSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateSerializer.swift; sourceTree = "<group>"; };
+		D8B27FCD207E0C71000009F3 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
+		D8B27FD0207E11DB000009F3 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +106,7 @@
 				D8737DFF207CFCB00010139C /* Application */,
 				D8737E00207CFCC40010139C /* Presentation */,
 				D8737E02207D1E050010139C /* Entities */,
+				D8B27FC1207DF783000009F3 /* Infrastructure */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -153,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				D8737E03207D1E1C0010139C /* Currency.swift */,
+				D8B27FCD207E0C71000009F3 /* ExchangeRate.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -164,6 +178,74 @@
 				D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D8B27FC1207DF783000009F3 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FC2207DF7D6000009F3 /* Networking */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		D8B27FC2207DF7D6000009F3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC16207E1AD80081FCCC /* API */,
+				D8B27FC6207E0997000009F3 /* Serialization */,
+				D8B27FC3207E0381000009F3 /* Request */,
+				D8B27FCF207E11BA000009F3 /* Client */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D8B27FC3207E0381000009F3 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FC4207E0456000009F3 /* APIRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		D8B27FC6207E0997000009F3 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FC9207E0B35000009F3 /* Abstract */,
+				D8B27FCA207E0B58000009F3 /* Concrete */,
+			);
+			path = Serialization;
+			sourceTree = "<group>";
+		};
+		D8B27FC9207E0B35000009F3 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FC7207E09AD000009F3 /* Serialization.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		D8B27FCA207E0B58000009F3 /* Concrete */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FCB207E0C1D000009F3 /* ExchangeRateSerializer.swift */,
+			);
+			path = Concrete;
+			sourceTree = "<group>";
+		};
+		D8B27FCF207E11BA000009F3 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				D8B27FD0207E11DB000009F3 /* APIClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		D8F2DC16207E1AD80081FCCC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,7 +373,13 @@
 			files = (
 				D8737E04207D1E1C0010139C /* Currency.swift in Sources */,
 				D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */,
+				D8B27FD1207E11DB000009F3 /* APIClient.swift in Sources */,
+				D8B27FCC207E0C1D000009F3 /* ExchangeRateSerializer.swift in Sources */,
 				D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */,
+				D8F2DC18207E1B770081FCCC /* ExchangeRateAPI.swift in Sources */,
+				D8B27FCE207E0C71000009F3 /* ExchangeRate.swift in Sources */,
+				D8B27FC5207E0456000009F3 /* APIRequest.swift in Sources */,
+				D8B27FC8207E09AD000009F3 /* Serialization.swift in Sources */,
 				D8737DEA207CF9F40010139C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
