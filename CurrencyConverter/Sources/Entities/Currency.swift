@@ -12,3 +12,9 @@ struct Currency {
     let code: String
     let rate: Float
 }
+
+extension Currency: Equatable {
+    static func ==(lhs: Currency, rhs: Currency) -> Bool {
+        return lhs.code == rhs.code
+    }
+}

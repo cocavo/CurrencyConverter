@@ -8,34 +8,24 @@
 
 import UIKit
 
-class CurrencyConversionViewController: UIViewController {
-
+final class CurrencyConversionViewController: UIViewController {
     @IBOutlet private weak var messageLabel: UILabel!
     @IBOutlet private weak var fromInput: UITextField!
     @IBOutlet private weak var toInput: UITextField!
     @IBOutlet private weak var fromCurrencyButton: UIButton!
     @IBOutlet private weak var toCurrencyButton: UIButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let navigation = segue.destination as? UINavigationController,
+            let picker = navigation.topViewController as? CurrencyPickerViewController {
+            picker.set(currencies: [
+                Currency(code: "USD", rate: 1),
+                Currency(code: "GBP", rate: 1),
+                Currency(code: "JPY", rate: 1),
+                Currency(code: "EUR", rate: 1),
+                Currency(code: "RUB", rate: 1)
+                ],
+                       selectedCurrency: Currency(code: "RUB", rate: 1))
+        }
     }
-    */
-
 }

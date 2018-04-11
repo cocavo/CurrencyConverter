@@ -14,6 +14,7 @@
 		D8737DF4207CF9F40010139C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8737DF2207CF9F40010139C /* LaunchScreen.storyboard */; };
 		D8737E04207D1E1C0010139C /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8737E03207D1E1C0010139C /* Currency.swift */; };
 		D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8737E06207D1F7F0010139C /* CurrencyConversionViewController.swift */; };
+		D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D8737DF5207CF9F40010139C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8737E03207D1E1C0010139C /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		D8737E06207D1F7F0010139C /* CurrencyConversionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionViewController.swift; sourceTree = "<group>"; };
+		D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				D8737E06207D1F7F0010139C /* CurrencyConversionViewController.swift */,
+				D8B1AB2D207D2B9D00D6BB3E /* CurrencyPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8737E04207D1E1C0010139C /* Currency.swift in Sources */,
+				D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */,
 				D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */,
 				D8737DEA207CF9F40010139C /* AppDelegate.swift in Sources */,
 			);
