@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 enum APIError: Error {
     case requestURLConstructionFailed
@@ -32,32 +33,25 @@ final class APIClient {
         self.responseProcessingQueue = DispatchQueue(label: "com.networking.response_processing_queue")
     }
 
-    func execute<Serializer: Serialization>(request:    APIRequest,
-                                            serializer: Serializer,
-                                            completion: @escaping (Result<Serializer.Entity>) -> Void) {
-        let internalCompletion: (Result<Serializer.Entity>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-
-
+    func execute<Serializer: Serialization>(request: APIRequest, serializer: Serializer) -> Single<Serializer.Entity> {
         guard let url = constructURL(for: request) else {
-            internalCompletion(.failure(APIError.requestURLConstructionFailed))
-            return
+            return .error(APIError.requestURLConstructionFailed)
         }
 
-        manager.request(url).responseJSON(queue: responseProcessingQueue) { (response) in
-            switch response.result {
-            case let .success(data):
-                if let json = data as? RawJSON, let entity = serializer.serialize(json: json) {
-                    internalCompletion(.success(entity))
-                } else {
-                    internalCompletion(.failure(APIError.invalidResponse))
+        return .create { (observer) in
+            self.manager.request(url).responseJSON(queue: self.responseProcessingQueue) { (response) in
+                switch response.result {
+                case let .success(data):
+                    if let json = data as? RawJSON, let entity = serializer.serialize(json: json) {
+                        observer(.success(entity))
+                    } else {
+                        observer(.error(APIError.invalidResponse))
+                    }
+                case let .failure(error):
+                    observer(.error(error))
                 }
-            case let .failure(error):
-                internalCompletion(.failure(error))
             }
+            return Disposables.create()
         }
     }
 

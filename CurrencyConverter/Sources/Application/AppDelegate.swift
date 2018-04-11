@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let fixerAPIClient: APIClient
     private let exchangeRateAPI: ExchangeRateAPI
+    private let disposeBag = DisposeBag()
 
     override init() {
         let client = APIClient(baseURL:   "http://data.fixer.io",
@@ -23,15 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        exchangeRateAPI.fetchExchangeRate { (result) in
-            switch result {
-            case let .success(rate):
-                print("Fetched exchange rate: \(rate)")
-            case let .failure(error):
-                print("Fetching failed \(error)")
-            }
-        }
+        exchangeRateAPI.fetchExchangeRate()
+            .subscribe(onSuccess: { (rate) in
+                print("Fetched rate \(rate)")
+            },
+                       onError: { (error) in
+                        print("Fetching failed \(error)")
+            })
+            .disposed(by: disposeBag)
 
         return true
     }

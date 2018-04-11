@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Alamofire
+import RxSwift
 
 protocol ExchangeRateAPI {
-    func fetchExchangeRate(completion: @escaping (Result<ExchangeRate>) -> Void)
+    func fetchExchangeRate() -> Single<ExchangeRate>
 }
 
 final class ExchangeRateNetworking {
@@ -24,9 +24,8 @@ final class ExchangeRateNetworking {
 }
 
 extension ExchangeRateNetworking: ExchangeRateAPI {
-    func fetchExchangeRate(completion: @escaping (Result<ExchangeRate>) -> Void) {
-        apiClient.execute(request:    .exchangeRate,
-                          serializer: serializer,
-                          completion: completion)
+    func fetchExchangeRate() -> Single<ExchangeRate> {
+        return apiClient.execute(request:    .exchangeRate,
+                                 serializer: serializer)
     }
 }
