@@ -45,13 +45,13 @@ extension ExchangeRateArchivePersistence: ExchangeRatePersistence {
         }
     }
 
-    func storeExchangeRate(_ rate: ExchangeRate) -> Single<Void> {
+    func storeExchangeRate(_ rate: ExchangeRate) -> Single<ExchangeRate> {
         return .create { (observer) in
             self.workingQueue.async {
                 let json = self.serializer.deserialize(entity: rate)
                 NSKeyedArchiver.archiveRootObject(json, toFile: self.storagePath)
                 DispatchQueue.main.async {
-                    observer(.success(()))
+                    observer(.success((rate)))
                 }
             }
             return Disposables.create()

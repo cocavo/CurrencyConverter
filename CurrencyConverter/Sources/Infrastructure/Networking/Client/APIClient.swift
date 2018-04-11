@@ -43,12 +43,18 @@ final class APIClient {
                 switch response.result {
                 case let .success(data):
                     if let json = data as? RawJSON, let entity = serializer.serialize(json: json) {
-                        observer(.success(entity))
+                        DispatchQueue.main.async {
+                            observer(.success(entity))
+                        }
                     } else {
-                        observer(.error(APIError.invalidResponse))
+                        DispatchQueue.main.async {
+                            observer(.error(APIError.invalidResponse))
+                        }
                     }
                 case let .failure(error):
-                    observer(.error(error))
+                    DispatchQueue.main.async {
+                        observer(.error(error))
+                    }
                 }
             }
             return Disposables.create()

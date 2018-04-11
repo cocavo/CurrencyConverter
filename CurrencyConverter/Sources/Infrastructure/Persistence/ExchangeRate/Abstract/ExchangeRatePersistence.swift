@@ -11,5 +11,5 @@ import RxSwift
 
 protocol ExchangeRatePersistence {
     func restoreExchangeRate() -> Single<ExchangeRate?>
-    func storeExchangeRate(_ rate: ExchangeRate) -> Single<Void>
+    func storeExchangeRate(_ rate: ExchangeRate) -> Single<ExchangeRate>
 }
