@@ -13,4 +13,5 @@ typealias RawJSON = [String: Any]
 protocol Serialization {
     associatedtype Entity
     func serialize(json raw: RawJSON) -> Entity?
+    func deserialize(entity: Entity) -> RawJSON
 }

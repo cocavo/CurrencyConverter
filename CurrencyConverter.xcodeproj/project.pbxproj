@@ -21,6 +21,8 @@
 		D8B27FCE207E0C71000009F3 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FCD207E0C71000009F3 /* ExchangeRate.swift */; };
 		D8B27FD1207E11DB000009F3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B27FD0207E11DB000009F3 /* APIClient.swift */; };
 		D8F2DC18207E1B770081FCCC /* ExchangeRateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */; };
+		D8F2DC1E207E30AC0081FCCC /* ExchangeRatePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2DC1D207E30AC0081FCCC /* ExchangeRatePersistence.swift */; };
+		D8F2DC20207E318A0081FCCC /* ExchangeRateArchivePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2DC1F207E318A0081FCCC /* ExchangeRateArchivePersistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		D8B27FCD207E0C71000009F3 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		D8B27FD0207E11DB000009F3 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPI.swift; sourceTree = "<group>"; };
+		D8F2DC1D207E30AC0081FCCC /* ExchangeRatePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatePersistence.swift; sourceTree = "<group>"; };
+		D8F2DC1F207E318A0081FCCC /* ExchangeRateArchivePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateArchivePersistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				D8B27FC2207DF7D6000009F3 /* Networking */,
+				D8F2DC19207E304D0081FCCC /* Persistence */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -246,6 +251,39 @@
 				D8F2DC17207E1B770081FCCC /* ExchangeRateAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		D8F2DC19207E304D0081FCCC /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC1A207E30670081FCCC /* ExchangeRate */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		D8F2DC1A207E30670081FCCC /* ExchangeRate */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC1B207E30700081FCCC /* Abstract */,
+				D8F2DC1C207E30910081FCCC /* Concrete */,
+			);
+			path = ExchangeRate;
+			sourceTree = "<group>";
+		};
+		D8F2DC1B207E30700081FCCC /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC1D207E30AC0081FCCC /* ExchangeRatePersistence.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		D8F2DC1C207E30910081FCCC /* Concrete */ = {
+			isa = PBXGroup;
+			children = (
+				D8F2DC1F207E318A0081FCCC /* ExchangeRateArchivePersistence.swift */,
+			);
+			path = Concrete;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,10 +409,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F2DC1E207E30AC0081FCCC /* ExchangeRatePersistence.swift in Sources */,
 				D8737E04207D1E1C0010139C /* Currency.swift in Sources */,
 				D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */,
 				D8B27FD1207E11DB000009F3 /* APIClient.swift in Sources */,
 				D8B27FCC207E0C1D000009F3 /* ExchangeRateSerializer.swift in Sources */,
+				D8F2DC20207E318A0081FCCC /* ExchangeRateArchivePersistence.swift in Sources */,
 				D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */,
 				D8F2DC18207E1B770081FCCC /* ExchangeRateAPI.swift in Sources */,
 				D8B27FCE207E0C71000009F3 /* ExchangeRate.swift in Sources */,
