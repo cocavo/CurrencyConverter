@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0723B827E760C6693908C60A /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CACC95DC90248501EC1FCC /* Pods_CurrencyConverter.framework */; };
+		D872BC65207F35D0006F0CA7 /* CurrencyConversionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D872BC64207F35D0006F0CA7 /* CurrencyConversionStore.swift */; };
+		D872BC68207F39B1006F0CA7 /* CurrencyConversionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D872BC67207F39B1006F0CA7 /* CurrencyConversionSettings.swift */; };
 		D8737DEA207CF9F40010139C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8737DE9207CF9F40010139C /* AppDelegate.swift */; };
 		D8737DEF207CF9F40010139C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8737DED207CF9F40010139C /* Main.storyboard */; };
 		D8737DF1207CF9F40010139C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8737DF0207CF9F40010139C /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		62CACC95DC90248501EC1FCC /* Pods_CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B436A7E4AA4D82924810B34 /* Pods-CurrencyConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter.release.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter.release.xcconfig"; sourceTree = "<group>"; };
 		BDBBF69F5C8273C4FD2FC016 /* Pods-CurrencyConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter.debug.xcconfig"; sourceTree = "<group>"; };
+		D872BC64207F35D0006F0CA7 /* CurrencyConversionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionStore.swift; sourceTree = "<group>"; };
+		D872BC67207F39B1006F0CA7 /* CurrencyConversionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionSettings.swift; sourceTree = "<group>"; };
 		D8737DE6207CF9F40010139C /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8737DE9207CF9F40010139C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8737DEE207CF9F40010139C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 				62CACC95DC90248501EC1FCC /* Pods_CurrencyConverter.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D872BC66207F3977006F0CA7 /* CurrencyConversionSettings */ = {
+			isa = PBXGroup;
+			children = (
+				D872BC67207F39B1006F0CA7 /* CurrencyConversionSettings.swift */,
+			);
+			path = CurrencyConversionSettings;
 			sourceTree = "<group>";
 		};
 		D8737DDD207CF9F40010139C = {
@@ -262,6 +274,7 @@
 		D8F2DC19207E304D0081FCCC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				D872BC66207F3977006F0CA7 /* CurrencyConversionSettings */,
 				D8F2DC1A207E30670081FCCC /* ExchangeRate */,
 			);
 			path = Persistence;
@@ -296,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F2DC24207E519A0081FCCC /* ExchangeRateStore.swift */,
+				D872BC64207F35D0006F0CA7 /* CurrencyConversionStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -427,11 +441,13 @@
 				D8737E04207D1E1C0010139C /* Currency.swift in Sources */,
 				D8B1AB2E207D2B9D00D6BB3E /* CurrencyPickerViewController.swift in Sources */,
 				D8B27FD1207E11DB000009F3 /* APIClient.swift in Sources */,
+				D872BC65207F35D0006F0CA7 /* CurrencyConversionStore.swift in Sources */,
 				D8B27FCC207E0C1D000009F3 /* ExchangeRateSerializer.swift in Sources */,
 				D8F2DC20207E318A0081FCCC /* ExchangeRateArchivePersistence.swift in Sources */,
 				D8737E07207D1F7F0010139C /* CurrencyConversionViewController.swift in Sources */,
 				D8F2DC18207E1B770081FCCC /* ExchangeRateAPI.swift in Sources */,
 				D8B27FCE207E0C71000009F3 /* ExchangeRate.swift in Sources */,
+				D872BC68207F39B1006F0CA7 /* CurrencyConversionSettings.swift in Sources */,
 				D8B27FC5207E0456000009F3 /* APIRequest.swift in Sources */,
 				D8B27FC8207E09AD000009F3 /* Serialization.swift in Sources */,
 				D8F2DC22207E4EEF0081FCCC /* HomeViewController.swift in Sources */,

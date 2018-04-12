@@ -24,7 +24,7 @@ final class CurrencyPickerViewController: UITableViewController {
     }
 
     func set(currencies: [Currency], selectedCurrency: Currency) {
-        self.currencies = currencies
+        self.currencies = currencies.sorted { $0.code < $1.code }
         self.selectedCurrency = selectedCurrency
         if isViewLoaded {
             tableView.reloadData()

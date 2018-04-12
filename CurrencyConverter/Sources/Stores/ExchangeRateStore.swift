@@ -51,6 +51,11 @@ extension ExchangeRateStore {
             }
             .track(state)
             .disposed(by: disposeBag)
+
+//        persistence.restoreExchangeRate()
+//            .map { $0! }
+//            .track(state)
+//            .disposed(by: disposeBag)
     }
 
     private func fetchExchangeRateFromNetwork() -> Single<ExchangeRate> {

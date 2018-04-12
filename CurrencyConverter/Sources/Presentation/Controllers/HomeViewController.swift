@@ -15,8 +15,8 @@ final class HomeViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
 
-    var conversionViewController: UIViewController? {
-        return childViewControllers.first { $0 is CurrencyConversionViewController }
+    var conversionViewController: CurrencyConversionViewController? {
+        return childViewControllers.first { $0 is CurrencyConversionViewController } as? CurrencyConversionViewController
     }
 
     private lazy var statusDateFormatter: DateFormatter = {
@@ -56,19 +56,31 @@ private extension HomeViewController {
         }
 
         switch state {
+
         case .fetching:
             if rate == nil {
                 statusLabel.text = "Fetching exchange rate..."
                 spinner.startAnimating()
                 conversionViewController?.view.isHidden = true
             }
+
         case let .fetched(rate):
             self.rate = rate
             spinner.stopAnimating()
-            conversionViewController?.view.isHidden = false
             render(rate: rate)
+            if let conversion = conversionViewController {
+                conversion.view.isHidden = false
+                if let store = conversion.store {
+                    store.dispatch(action: .changeCurrencies(rate.currencies))
+                } else {
+                    conversion.store = CurrencyConversionStore(settings:   CurrencyConversionUserDefaultsSettings(),
+                                                               currencies: rate.currencies)
+                }
+            }
+
         case let .failed(error):
             render(error: error)
+
         default:
             break
         }
