@@ -9,27 +9,25 @@
 import Foundation
 import RxSwift
 
-enum ExchangeRateStoreState {
-    case idle
-    case fetching
-    case fetched(ExchangeRate)
-    case failed(Error)
-}
-
-extension ExchangeRateStoreState {
-    var isNotFetching: Bool {
-        if case .fetching = self {
-            return false
-        }
-        return true
-    }
-}
-
 final class ExchangeRateStore {
+    enum State {
+        case idle
+        case fetching
+        case fetched(ExchangeRate)
+        case failed(Error)
+
+        var isNotFetching: Bool {
+            if case .fetching = self {
+                return false
+            }
+            return true
+        }
+    }
+
     private let API: ExchangeRateAPI
     private let persistence: ExchangeRatePersistence
     private let disposeBag: DisposeBag
-    let state: Variable<ExchangeRateStoreState>
+    let state: Variable<State>
 
     init(API: ExchangeRateAPI, persistence: ExchangeRatePersistence) {
         self.API = API
@@ -66,7 +64,7 @@ extension ExchangeRateStore {
 }
 
 extension Single where TraitType == SingleTrait, Element == ExchangeRate {
-    func track(_ state: Variable<ExchangeRateStoreState>) -> Disposable {
+    func track(_ state: Variable<ExchangeRateStore.State>) -> Disposable {
         state.value = .fetching
         return subscribe { (event) in
             switch event {

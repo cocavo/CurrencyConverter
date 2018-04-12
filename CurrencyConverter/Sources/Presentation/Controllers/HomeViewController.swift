@@ -55,7 +55,7 @@ final class HomeViewController: UIViewController {
 }
 
 private extension HomeViewController {
-    func render(state: ExchangeRateStoreState) {
+    func render(state: ExchangeRateStore.State) {
         guard isViewLoaded else {
             return
         }
