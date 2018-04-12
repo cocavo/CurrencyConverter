@@ -12,7 +12,8 @@ import RxSwift
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
-    
+    @IBOutlet private weak var conversionContainer: UIView!
+
     private let disposeBag = DisposeBag()
 
     var conversionViewController: CurrencyConversionViewController? {
@@ -46,6 +47,10 @@ final class HomeViewController: UIViewController {
         if let store = store {
             render(state: store.state.value)
         }
+    }
+
+    @IBAction func tappedOutsideConversionContainer(_ sender: Any) {
+        view.endEditing(true)
     }
 }
 
@@ -100,5 +105,12 @@ private extension HomeViewController {
                                         self.store?.fetchExchangeRate()
         }))
         present(alert, animated: true)
+    }
+}
+
+extension HomeViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let tapPoint = gestureRecognizer.location(in: view)
+        return !conversionContainer.frame.contains(tapPoint)
     }
 }
