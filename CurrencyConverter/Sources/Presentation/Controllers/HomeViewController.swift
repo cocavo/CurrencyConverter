@@ -11,9 +11,13 @@ import RxSwift
 
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var statusLabel: UILabel!
-    @IBOutlet private weak var loadingView: UIView!
-
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
+    
     private let disposeBag = DisposeBag()
+
+    var conversionViewController: UIViewController? {
+        return childViewControllers.first { $0 is CurrencyConversionViewController }
+    }
 
     private lazy var statusDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -39,7 +43,6 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.bringSubview(toFront: loadingView)
         if let store = store {
             render(state: store.state.value)
         }
@@ -55,11 +58,14 @@ private extension HomeViewController {
         switch state {
         case .fetching:
             if rate == nil {
-                loadingView.isHidden = false
+                statusLabel.text = "Fetching exchange rate..."
+                spinner.startAnimating()
+                conversionViewController?.view.isHidden = true
             }
         case let .fetched(rate):
             self.rate = rate
-            loadingView.isHidden = true
+            spinner.stopAnimating()
+            conversionViewController?.view.isHidden = false
             render(rate: rate)
         case let .failed(error):
             render(error: error)
@@ -74,7 +80,7 @@ private extension HomeViewController {
 
     func render(error: Error) {
         let alert = UIAlertController(title: "Oops!",
-                                      message: "Could not fetch an exchange rate",
+                                      message: "Could not fetch an exchange rate.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Retry",
                                       style: .default,
