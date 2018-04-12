@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let client = APIClient(baseURL:   "http://data.fixer.io",
                                accessKey: "435a51b385023fbdc4595d248551efd7")
         let API = ExchangeRateNetworking(apiClient: client)
-        let storagePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let persistence = ExchangeRateArchivePersistence(storagePath: storagePath)
+        let cachesDirPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        let persistence = ExchangeRateArchivePersistence(storagePath: cachesDirPath + "/ExchangeRate")
         self.exchangeRateStore = ExchangeRateStore(API: API, persistence: persistence)
     }
 

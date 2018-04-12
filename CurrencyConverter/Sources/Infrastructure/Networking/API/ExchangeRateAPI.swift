@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ExchangeRateAPI {
-    func fetchExchangeRate() -> Single<ExchangeRate>
+    func fetchExchangeRate() -> Observable<ExchangeRate>
 }
 
 final class ExchangeRateNetworking {
@@ -24,7 +24,7 @@ final class ExchangeRateNetworking {
 }
 
 extension ExchangeRateNetworking: ExchangeRateAPI {
-    func fetchExchangeRate() -> Single<ExchangeRate> {
+    func fetchExchangeRate() -> Observable<ExchangeRate> {
         return apiClient.execute(request:    .exchangeRate,
                                  serializer: serializer)
     }

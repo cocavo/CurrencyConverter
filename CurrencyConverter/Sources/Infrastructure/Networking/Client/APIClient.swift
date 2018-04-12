@@ -33,7 +33,7 @@ final class APIClient {
         self.responseProcessingQueue = DispatchQueue(label: "com.networking.response_processing_queue")
     }
 
-    func execute<Serializer: Serialization>(request: APIRequest, serializer: Serializer) -> Single<Serializer.Entity> {
+    func execute<Serializer: Serialization>(request: APIRequest, serializer: Serializer) -> Observable<Serializer.Entity> {
         guard let url = constructURL(for: request) else {
             return .error(APIError.requestURLConstructionFailed)
         }
@@ -44,16 +44,17 @@ final class APIClient {
                 case let .success(data):
                     if let json = data as? RawJSON, let entity = serializer.serialize(json: json) {
                         DispatchQueue.main.async {
-                            observer(.success(entity))
+                            observer.onNext(entity)
+                            observer.onCompleted()
                         }
                     } else {
                         DispatchQueue.main.async {
-                            observer(.error(APIError.invalidResponse))
+                            observer.onError(APIError.invalidResponse)
                         }
                     }
                 case let .failure(error):
                     DispatchQueue.main.async {
-                        observer(.error(error))
+                        observer.onError(error)
                     }
                 }
             }

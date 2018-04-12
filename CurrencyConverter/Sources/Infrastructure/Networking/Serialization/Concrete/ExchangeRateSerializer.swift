@@ -38,8 +38,9 @@ final class ExchangeRateSerializer: Serialization {
 
     func deserialize(entity: ExchangeRate) -> RawJSON {
         return [
+            JSONKeys.success:   true,
             JSONKeys.timestamp: entity.timestamp.timeIntervalSince1970,
-            JSONKeys.rates: entity.currencies.reduce(into: RawJSON()) { (result, currency) in
+            JSONKeys.rates:     entity.currencies.reduce(into: RawJSON()) { (result, currency) in
                 result[currency.code] = currency.rate
             }
         ]

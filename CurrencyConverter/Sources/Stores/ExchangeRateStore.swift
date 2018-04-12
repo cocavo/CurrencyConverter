@@ -43,36 +43,37 @@ extension ExchangeRateStore {
             return
         }
 
-        API.fetchExchangeRate()
-            .flatMap {
-                self.persistence.storeExchangeRate($0)
-            }
+        Observable.concat(persistence.restoreExchangeRate().catchErrorJustComplete(),
+                          fetchExchangeRateFromNetwork())
             .track(state)
             .disposed(by: disposeBag)
-
-//        persistence.restoreExchangeRate()
-//            .map { $0! }
-//            .track(state)
-//            .disposed(by: disposeBag)
     }
 
-    private func fetchExchangeRateFromNetwork() -> Single<ExchangeRate> {
+    private func fetchExchangeRateFromNetwork() -> Observable<ExchangeRate> {
         return API.fetchExchangeRate().flatMap {
             self.persistence.storeExchangeRate($0)
         }
     }
 }
 
-extension Single where TraitType == SingleTrait, Element == ExchangeRate {
+extension Observable where Element == ExchangeRate {
     func track(_ state: Variable<ExchangeRateStore.State>) -> Disposable {
         state.value = .fetching
         return subscribe { (event) in
             switch event {
-            case let .success(rate):
+            case let .next(rate):
                 state.value = .fetched(rate)
             case let .error(error):
                 state.value = .failed(error)
+            default:
+                break
             }
         }
+    }
+}
+
+extension Observable {
+    func catchErrorJustComplete() -> Observable {
+        return catchError { (_) in .empty() }
     }
 }

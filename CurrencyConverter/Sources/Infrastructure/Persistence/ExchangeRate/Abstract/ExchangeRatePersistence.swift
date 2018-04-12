@@ -9,7 +9,11 @@
 import Foundation
 import RxSwift
 
+enum ExchangeRatePersistenceError: Error {
+    case noStoredExchangeRate
+}
+
 protocol ExchangeRatePersistence {
-    func restoreExchangeRate() -> Single<ExchangeRate?>
-    func storeExchangeRate(_ rate: ExchangeRate) -> Single<ExchangeRate>
+    func restoreExchangeRate() -> Observable<ExchangeRate>
+    func storeExchangeRate(_ rate: ExchangeRate) -> Observable<ExchangeRate>
 }

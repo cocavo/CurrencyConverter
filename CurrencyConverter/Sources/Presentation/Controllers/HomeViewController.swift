@@ -84,7 +84,9 @@ private extension HomeViewController {
             }
 
         case let .failed(error):
-            render(error: error)
+            if rate == nil {
+                render(error: error)
+            }
 
         default:
             break

@@ -30,7 +30,7 @@ final class ExchangeRateArchivePersistence {
 }
 
 extension ExchangeRateArchivePersistence: ExchangeRatePersistence {
-    func restoreExchangeRate() -> Single<ExchangeRate?> {
+    func restoreExchangeRate() -> Observable<ExchangeRate> {
         return .create { (observer) in
             self.workingQueue.async {
                 var rate: ExchangeRate?
@@ -38,20 +38,26 @@ extension ExchangeRateArchivePersistence: ExchangeRatePersistence {
                     rate = self.serializer.serialize(json: json)
                 }
                 DispatchQueue.main.async {
-                    observer(.success(rate))
+                    if let rate = rate {
+                        observer.onNext(rate)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(ExchangeRatePersistenceError.noStoredExchangeRate)
+                    }
                 }
             }
             return Disposables.create()
         }
     }
 
-    func storeExchangeRate(_ rate: ExchangeRate) -> Single<ExchangeRate> {
+    func storeExchangeRate(_ rate: ExchangeRate) -> Observable<ExchangeRate> {
         return .create { (observer) in
             self.workingQueue.async {
                 let json = self.serializer.deserialize(entity: rate)
                 NSKeyedArchiver.archiveRootObject(json, toFile: self.storagePath)
                 DispatchQueue.main.async {
-                    observer(.success((rate)))
+                    observer.onNext(rate)
+                    observer.onCompleted()
                 }
             }
             return Disposables.create()
