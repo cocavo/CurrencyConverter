@@ -29,11 +29,14 @@ final class ExchangeRateStore {
     private let disposeBag: DisposeBag
     let state: Variable<State>
 
+    private var appStateObserver: NSObjectProtocol?
+
     init(API: ExchangeRateAPI, persistence: ExchangeRatePersistence) {
         self.API = API
         self.persistence = persistence
         self.disposeBag = DisposeBag()
         self.state = Variable(.idle)
+        startAppStateObserving()
     }
 }
 
@@ -53,6 +56,19 @@ extension ExchangeRateStore {
         return API.fetchExchangeRate().flatMap {
             self.persistence.storeExchangeRate($0)
         }
+    }
+}
+
+private extension ExchangeRateStore {
+    func startAppStateObserving() {
+        let nc = NotificationCenter.default
+        appStateObserver = nc.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground,
+                                          object: nil,
+                                          queue: .main,
+                                          using: { [weak self] (_) in
+                                            guard let this = self else { return }
+                                            this.fetchExchangeRate()
+        })
     }
 }
 
