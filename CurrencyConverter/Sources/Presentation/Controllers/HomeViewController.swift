@@ -61,43 +61,42 @@ private extension HomeViewController {
         }
 
         switch state {
-
         case .fetching:
-            if rate == nil {
-                statusLabel.text = "Fetching exchange rate..."
-                spinner.startAnimating()
-                conversionViewController?.view.isHidden = true
-            }
-
+            render(animating: true)
         case let .fetched(rate):
-            self.rate = rate
-            spinner.stopAnimating()
+            render(animating: false)
             render(rate: rate)
-            if let conversion = conversionViewController {
-                conversion.view.isHidden = false
-                if let store = conversion.store {
-                    store.dispatch(action: .changeCurrencies(rate.currencies))
-                } else {
-                    conversion.store = CurrencyConversionStore(settings:   CurrencyConversionUserDefaultsSettings(),
-                                                               currencies: rate.currencies)
-                }
-            }
-
+            updateConversionView(rate: rate)
         case let .failed(error):
-            if rate == nil {
-                render(error: error)
-            }
-
+            render(animating: false)
+            render(error: error)
         default:
             break
         }
     }
 
+    func render(animating: Bool) {
+        if animating {
+            if rate == nil {
+                statusLabel.text = "Fetching exchange rate..."
+                spinner.startAnimating()
+                conversionViewController?.view.isHidden = true
+            }
+        } else {
+            spinner.stopAnimating()
+        }
+    }
+
     func render(rate: ExchangeRate) {
+        self.rate = rate
         statusLabel.text = "Exchange rate from \(statusDateFormatter.string(from: rate.timestamp))"
     }
 
     func render(error: Error) {
+        guard rate == nil else {
+            return
+        }
+
         let alert = UIAlertController(title: "Oops!",
                                       message: "Could not fetch an exchange rate.",
                                       preferredStyle: .alert)
@@ -107,6 +106,18 @@ private extension HomeViewController {
                                         self.store?.fetchExchangeRate()
         }))
         present(alert, animated: true)
+    }
+
+    func updateConversionView(rate: ExchangeRate) {
+        if let conversion = conversionViewController {
+            conversion.view.isHidden = false
+            if let store = conversion.store {
+                store.dispatch(action: .changeCurrencies(rate.currencies))
+            } else {
+                conversion.store = CurrencyConversionStore(settings:   CurrencyConversionUserDefaultsSettings(),
+                                                           currencies: rate.currencies)
+            }
+        }
     }
 }
 
